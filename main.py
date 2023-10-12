@@ -30,14 +30,15 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 @app.on_event('startup')
 async def app_startup():
+    pass
     # from config import pg_config
     # from persistence.database import pg_pool_handler
     # await pg_pool_handler.initialize(db_config=pg_config)
 
 
-    from config import ch_config
-    from persistence.database import clickhouse_pool_handler
-    await clickhouse_pool_handler.initialize(db_config=ch_config)
+    # from config import ch_config
+    # from persistence.database import clickhouse_pool_handler
+    # await clickhouse_pool_handler.initialize(db_config=ch_config)
 
     # if s3 needed
     # from config import s3_config
@@ -60,11 +61,12 @@ async def app_startup():
 
 @app.on_event('shutdown')
 async def app_shutdown():
+    pass
     # from persistence.database import pg_pool_handler
     # await pg_pool_handler.close()
 
-    from persistence.database import clickhouse_pool_handler
-    await clickhouse_pool_handler.close()
+    # from persistence.database import clickhouse_pool_handler
+    # await clickhouse_pool_handler.close()
 
     # if s3 needed
     # from persistence.s3 import s3_handler

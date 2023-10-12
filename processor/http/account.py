@@ -62,9 +62,3 @@ async def login(data: LoginInput) -> LoginOutput:
 
     token = encode_jwt(account_id=account_id, role=role)
     return LoginOutput(account_id=account_id, token=token)
-
-
-@router.post('/test')
-async def test() -> int:
-    return 1
-

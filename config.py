@@ -15,7 +15,7 @@ class PGConfig:
     username = env_values.get('PG_USERNAME')
     password = env_values.get('PG_PASSWORD')
     db_name = env_values.get('PG_DBNAME')
-    max_pool_size = int(env_values.get('PG_MAX_POOL_SIZE'))
+    max_pool_size = int(env_values.get('PG_MAX_POOL_SIZE') or 1)
 
 
 class CHConfig:
@@ -24,7 +24,7 @@ class CHConfig:
     username = env_values.get('CH_USERNAME')
     password = env_values.get('CH_PASSWORD')
     db_name = env_values.get('CH_DBNAME')
-    max_pool_size = int(env_values.get('CH_MAX_POOL_SIZE'))
+    max_pool_size = int(env_values.get('CH_MAX_POOL_SIZE') or 1)
 
 
 class AppConfig:
