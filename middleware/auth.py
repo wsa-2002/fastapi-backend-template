@@ -1,4 +1,5 @@
 from datetime import datetime
+import uuid
 
 from fastapi import Request
 from starlette_context import context
@@ -7,10 +8,13 @@ import security
 
 
 async def middleware(request: Request, call_next):
-    time = datetime.now()
+    request_uuid, request_time = uuid.uuid1(), datetime.now()
     account = None
     if auth_token := request.headers.get('auth-token', None):
-        account = security.decode_jwt(auth_token, time=time)
+        account = security.decode_jwt(auth_token, time=request_time)
     context['account'] = account
-    context['time'] = time
-    return await call_next(request)
+    context['time'] = request_time
+    context['request_uuid'] = request_uuid
+    response = await call_next(request)
+    response.headers['X-Request-UUID'] = str(request_uuid)
+    return response

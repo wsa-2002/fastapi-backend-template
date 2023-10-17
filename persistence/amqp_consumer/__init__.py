@@ -3,6 +3,7 @@ from typing import Callable, Coroutine, Any
 
 import aio_pika
 
+import log
 from config import AMQPConfig, AMQP_CONSUME_QUEUE
 
 
@@ -28,7 +29,7 @@ def make_consumer(amqp_config: AMQPConfig, consume_function: Callable[[bytes], C
                     try:
                         await consume_function(message.body)
                     except Exception as e:
-                        print(e)
+                        log.exception(e)
                         await message.nack(requeue=False)
                     else:
                         await message.ack()

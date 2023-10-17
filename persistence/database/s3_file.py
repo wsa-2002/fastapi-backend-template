@@ -1,7 +1,6 @@
 from base import do
 
-from .util import pyformat2psql, PostgresQueryExecutor
-from . import pg_pool_handler
+from .util import PostgresQueryExecutor
 
 
 async def add(s3_file: do.S3File) -> None:

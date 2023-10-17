@@ -51,7 +51,7 @@ class LoginOutput:
 
 
 @router.post('/login')
-async def login(data: LoginInput) -> LoginOutput:
+async def login(data: LoginInput, db_=Depends()) -> LoginOutput:
     try:
         account_id, pass_hash, role = await db.account.read_by_username(data.username)
     except TypeError:

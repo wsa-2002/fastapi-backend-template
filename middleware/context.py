@@ -17,5 +17,9 @@ class Request(metaclass=mcs.Singleton):
     def time(self) -> datetime:
         return self._context.get('time')
 
+    @property
+    def uuid(self):
+        return self._context.get('request-uuid')
+
 
 request = Request()

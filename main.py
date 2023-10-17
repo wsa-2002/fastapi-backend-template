@@ -1,3 +1,9 @@
+with open('logging.yaml', 'r') as conf:
+    import yaml
+    log_config = yaml.safe_load(conf.read())
+    import logging.config
+    logging.config.dictConfig(log_config)
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
@@ -78,6 +84,9 @@ async def app_shutdown():
 
 import middleware.envelope
 app.middleware('http')(middleware.envelope.middleware)
+
+import middleware.logging
+app.middleware('http')(middleware.logging.middleware)
 
 import middleware.auth
 app.middleware('http')(middleware.auth.middleware)
