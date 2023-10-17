@@ -6,8 +6,6 @@ from starlette_context import context
 
 logger = logging.getLogger(__name__)
 
-# Event logging
-
 
 def info(msg, extra=None):
     logger.info(f"request {context['request_uuid']}\t{msg}", extra=extra)

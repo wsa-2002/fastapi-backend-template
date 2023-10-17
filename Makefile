@@ -14,3 +14,17 @@ run: # run service without reload flag
 dev: # run service with reload flag
 	uvicorn main:app --reload
 
+docker-build: # build docker image
+	docker build -t cloud-native .
+
+docker-build-x86: # build x86_64 docker image
+	docker build --platform=linux/amd64 -t cloud-native .
+
+docker-run: # run docker container with newest image of "cloud-native", backend port would be 8000
+	docker run --name cloud-native -p 8000:80 cloud-native
+
+docker-stop: # stop cloud-native container
+	docker stop cloud-native
+
+docker-rm: # rm cloud-native container
+	docker rm cloud-native
