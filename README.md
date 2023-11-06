@@ -1,15 +1,13 @@
 ```shell
-conda create --name backend python=3.11
-conda activate backend
-pip install -r requirements.txt
-cp .env.example .env
+make install
 ```
 
 paste environment variables
 
 ```shell
-pip install uvicorn
-uvicorn main:app --reload
+make run
 ```
 
-go to localhost:8000/docs and you will see backend swagger
+go to http://localhost:8000/docs and you will see backend swagger
+
+Note: You may check some useful commands through `make help`
