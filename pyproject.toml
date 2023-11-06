@@ -17,17 +17,18 @@ PyJWT = "^2.6.0"
 passlib = "1.7.4"
 argon2-cffi = "21.3.0"
 aio-pika = "^8.2.5"
-aioboto3 = "^10.2.0"
+aioboto3 = "12.0.0"
 python-multipart = "0.0.5"
 asynch = "0.2.2"
 python-json-logger = "2.0.7"
 PyYAML = "6.0.1"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.1.0"
 responses = "^0.23.3"
 coverage = "^7.3.2"
 freezegun = "^1.2.2"
+isort = "^5.12.0"
+pre-commit = "^3.5.0"
 
 [build-system]
 requires = ["poetry-core"]
