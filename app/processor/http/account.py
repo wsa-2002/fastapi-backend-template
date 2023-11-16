@@ -6,7 +6,7 @@ from pydantic import BaseModel
 import app.exceptions as exc
 import app.persistence.database as db
 from app.middleware.headers import get_auth_token
-from app.security import encode_jwt, hash_password, verify_password
+from app.utils.security import encode_jwt, hash_password, verify_password
 
 router = APIRouter(
     tags=['Account'],
