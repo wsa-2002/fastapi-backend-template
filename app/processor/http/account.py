@@ -11,7 +11,7 @@ from app.utils.security import encode_jwt, hash_password, verify_password
 router = APIRouter(
     tags=['Account'],
     default_response_class=responses.JSONResponse,
-    dependencies=[Depends(get_auth_token)]
+    dependencies=[Depends(get_auth_token)],
 )
 
 
@@ -29,11 +29,10 @@ class AddAccountOutput:
 
 @router.post('/account')
 async def add_account(data: AddAccountInput) -> AddAccountOutput:
-    if await db.account.is_duplicate_student_id(student_id=data.student_id):
-        raise exc.DuplicateStudentId
-
-    account_id = await db.account.add(username=data.username,
-                                      pass_hash=hash_password(data.password))
+    account_id = await db.account.add(
+        username=data.username,
+        pass_hash=hash_password(data.password),
+    )
 
     return AddAccountOutput(id=account_id)
 
@@ -50,7 +49,7 @@ class LoginOutput:
 
 
 @router.post('/login')
-async def login(data: LoginInput, db_=Depends()) -> LoginOutput:
+async def login(data: LoginInput) -> LoginOutput:
     try:
         account_id, pass_hash, role = await db.account.read_by_username(data.username)
     except TypeError:
@@ -59,5 +58,5 @@ async def login(data: LoginInput, db_=Depends()) -> LoginOutput:
     if not verify_password(data.password, pass_hash):
         raise exc.LoginFailed
 
-    token = encode_jwt(account_id=account_id, role=role)
+    token = encode_jwt(account_id=account_id)
     return LoginOutput(account_id=account_id, token=token)

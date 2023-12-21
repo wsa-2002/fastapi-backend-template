@@ -1,3 +1,4 @@
+from app.base import enums
 from app.persistence.database.util import PostgresQueryExecutor
 
 
@@ -10,3 +11,7 @@ async def add(username: str, pass_hash: str) -> int:
         username=username, pass_hash=pass_hash, role='role', real_name='real_name', student_id='student_id', fetch=1,
     ).execute()
     return id_
+
+
+async def read_by_username(username: str) -> tuple[int, str, enums.RoleType]:
+    pass
